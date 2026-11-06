@@ -4,3 +4,12 @@
 Unattended-Upgrade::Automatic-Reboot "true";
 Unattended-Upgrade::Automatic-Reboot-WithUsers "true";
 Unattended-Upgrade::Automatic-Reboot-Time "{{ base_reboot_time }}";
+{% if base_unattended_upgrades_blacklist %}
+// Never install these packages by itself (regular expressions). Kept for kernels with known
+// regressions; see base_unattended_upgrades_blacklist in roles/base/defaults/main.yml.
+Unattended-Upgrade::Package-Blacklist {
+{% for pattern in base_unattended_upgrades_blacklist %}
+    "{{ pattern }}";
+{% endfor %}
+};
+{% endif %}

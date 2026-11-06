@@ -7,3 +7,9 @@ base_swap_size: 2G
 base_swap_file: /swapfile
 # Swap only under real memory pressure.
 base_swappiness: 10
+# Packages unattended-upgrades must not install (regular expressions).
+# Ubuntu kernels 7.0.0-42 and -43 have an AppArmor signal regression: processes in containers
+# cannot signal each other ("kill: Permission denied"), and Prisma in LiteLLM hangs at start.
+# Remove the entries once Ubuntu ships a fixed kernel.
+base_unattended_upgrades_blacklist:
+  - '^linux-.*-7.0.0-4[23]-'
