@@ -1,6 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended", "schedule:automergeDaily", ":dependencyDashboard"],
+  "dependencyDashboard": {
+    "labels": ["renovate"]
+  },
   "customManagers": [
     {
       "customType": "regex",
